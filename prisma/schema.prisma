@@ -6,11 +6,31 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = "file:./db.sqlite"
-    // url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
-model Example {
-    id String @id @default(cuid())
+model Driver {
+    id          String @id @default(cuid())
+    name        String
+    number      Int
+    birthDate   DateTime
+    nationality String
+    votes       Vote[]
+    team        Team @relation(fields: [teamId], references: [id])
+    teamId      String
+}
+
+model Team {
+    id      String @id @default(cuid())
+    name    String
+    drivers Driver[]
+}
+
+model Vote {
+    id        String @id @default(cuid())
+    driver    Driver @relation(fields: [driverId], references: [id])
+    driverId  String
+    presented BigInt
+    voted     BigInt
 }
