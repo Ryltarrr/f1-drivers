@@ -30,7 +30,7 @@ model Team {
 model Vote {
     id        String @id @default(cuid())
     driver    Driver @relation(fields: [driverId], references: [id])
-    driverId  String
-    presented BigInt
-    voted     BigInt
+    driverId  String @unique
+    presented Int
+    voted     Int
 }

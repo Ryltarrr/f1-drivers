@@ -18,7 +18,6 @@ const Drivers: NextPage = () => {
             <Link href={`/drivers/${d.name}`}>
               <a className="block">{d.name}</a>
             </Link>
-            <button className="text-blue-500">Vote</button>
           </>
         ))}
       </main>

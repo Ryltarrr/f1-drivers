@@ -19,6 +19,9 @@ const Home: NextPage = () => {
         <Link href="/drivers">
           <a className="block">Drivers</a>
         </Link>
+        <Link href="/vote">
+          <a className="block">Vote</a>
+        </Link>
       </main>
     </>
   );

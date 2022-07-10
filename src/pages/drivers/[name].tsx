@@ -9,7 +9,7 @@ const Driver: NextPage = () => {
 
   const driver = trpc.useQuery(["drivers.byName", driverName]);
   if (!driver.data?.name) {
-    return <div>Team not found</div>;
+    return <div>Driver not found</div>;
   }
   return (
     <>
