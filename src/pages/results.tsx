@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "src/utils/trpc";
+import Image from "next/image";
 
 const Results: NextPage = () => {
   const results = trpc.useQuery(["drivers.results"]);
@@ -18,11 +19,18 @@ const Results: NextPage = () => {
         {results.data?.map(
           (result) =>
             results && (
-              <div key={result.id}>
+              <div
+                style={{ backgroundColor: result.driver.team.color }}
+                key={result.id}
+              >
                 <h2>{result.driver.name}</h2>
-                <p>{`${((result.voted / result.presented) * 100).toFixed(
-                  2
-                )}%`}</p>
+                <p>{`${(result.percentage * 100).toFixed(2)}%`}</p>
+                <p>{result.presented}</p>
+                <Image
+                  height="100px"
+                  width="100px"
+                  src={`/images/${result.driver.shortName}.png`}
+                />
               </div>
             )
         )}

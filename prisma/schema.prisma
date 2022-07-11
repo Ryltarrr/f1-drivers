@@ -13,6 +13,7 @@ datasource db {
 model Driver {
     id          String @id @default(cuid())
     name        String
+    shortName   String @db.VarChar(3)
     number      Int
     birthDate   DateTime
     nationality String
@@ -24,13 +25,15 @@ model Driver {
 model Team {
     id      String @id @default(cuid())
     name    String
+    color   String @db.VarChar(7)
     drivers Driver[]
 }
 
 model Vote {
-    id        String @id @default(cuid())
-    driver    Driver @relation(fields: [driverId], references: [id])
-    driverId  String @unique
-    presented Int
-    voted     Int
+    id         String @id @default(cuid())
+    driver     Driver @relation(fields: [driverId], references: [id])
+    driverId   String @unique
+    presented  Int
+    voted      Int
+    percentage Float
 }

@@ -36,16 +36,26 @@ const Vote: NextPage = () => {
 
       <main>
         <h1>Vote</h1>
-        {drivers.data?.map(
-          (driver) =>
-            driver && (
-              <div key={driver.id}>
-                <h2>{driver.name}</h2>
-                <p>{driver.id}</p>
-                <button onClick={() => handleVote(driver.id)}>Vote</button>
-              </div>
-            )
-        )}
+        <div>
+          {drivers.isLoading ? (
+            <p>loading...</p>
+          ) : (
+            <>
+              {drivers.data?.map(
+                (driver) =>
+                  driver && (
+                    <div key={driver.id}>
+                      <h2>{driver.name}</h2>
+                      <p>{driver.id}</p>
+                      <button onClick={() => handleVote(driver.id)}>
+                        Vote
+                      </button>
+                    </div>
+                  )
+              )}
+            </>
+          )}
+        </div>
       </main>
     </>
   );

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Vote } from "@prisma/client";
 import { z } from "zod";
 import { createRouter } from "./context";
 
@@ -46,8 +46,14 @@ export const driversRouter = createRouter()
   .query("results", {
     async resolve({ ctx }) {
       return await ctx.prisma.vote.findMany({
-        include: { driver: true },
-        orderBy: { presented: "desc" },
+        include: {
+          driver: {
+            include: {
+              team: true,
+            },
+          },
+        },
+        orderBy: { percentage: "desc" },
       });
     },
   })
@@ -68,25 +74,40 @@ export const driversRouter = createRouter()
   });
 
 async function addVote(driverId: string, voted: boolean, prisma: PrismaClient) {
-  const driver = await prisma.vote.upsert({
+  const vote = await prisma.vote.findFirst({
     where: {
-      driverId: driverId,
-    },
-    update: {
-      presented: {
-        increment: 1,
-      },
-      voted: {
-        increment: voted ? 1 : 0,
-      },
-    },
-    create: {
       driverId,
-      presented: 1,
-      voted: voted ? 1 : 0,
     },
   });
-  if (!driver) {
-    throw new Error("Driver not found");
+  let res: undefined | Vote;
+  if (vote) {
+    res = await prisma.vote.update({
+      where: {
+        driverId,
+      },
+      data: {
+        voted: {
+          increment: voted ? 1 : 0,
+        },
+        presented: {
+          increment: 1,
+        },
+        percentage: voted
+          ? (vote.voted + 1) / (vote.presented + 1)
+          : vote.voted / (vote.presented + 1),
+      },
+    });
+  } else {
+    res = await prisma.vote.create({
+      data: {
+        driverId,
+        presented: 1,
+        voted: voted ? 1 : 0,
+        percentage: voted ? 1 : 0,
+      },
+    });
+  }
+  if (!res) {
+    throw new Error("Could not vote, driver not found");
   }
 }
