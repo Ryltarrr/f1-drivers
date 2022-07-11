@@ -28,6 +28,9 @@ export const driversRouter = createRouter()
         orderBy: {
           name: "asc",
         },
+        include: {
+          team: true,
+        },
       });
       let skip2 = Math.floor(Math.random() * driversCount);
       while (skip2 === skip) {
@@ -38,6 +41,9 @@ export const driversRouter = createRouter()
         skip: skip2,
         orderBy: {
           name: "asc",
+        },
+        include: {
+          team: true,
         },
       });
       return [driver1[0], driver2[0]];

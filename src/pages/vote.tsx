@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "src/utils/trpc";
+import DriverVote from "src/components/DriverVote";
 
 const Vote: NextPage = () => {
   const drivers = trpc.useQuery(["drivers.twoRandom"], {
@@ -40,20 +41,14 @@ const Vote: NextPage = () => {
           {drivers.isLoading ? (
             <p>loading...</p>
           ) : (
-            <>
+            <div className="flex justify-center space-x-10">
               {drivers.data?.map(
                 (driver) =>
                   driver && (
-                    <div key={driver.id}>
-                      <h2>{driver.name}</h2>
-                      <p>{driver.id}</p>
-                      <button onClick={() => handleVote(driver.id)}>
-                        Vote
-                      </button>
-                    </div>
+                    <DriverVote driver={driver} handleVote={handleVote} />
                   )
               )}
-            </>
+            </div>
           )}
         </div>
       </main>
