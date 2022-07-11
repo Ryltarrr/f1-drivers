@@ -11,7 +11,7 @@ const Results: NextPage = () => {
       <Head>
         <title>Results</title>
         <meta name="description" content="Votes results" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <main>

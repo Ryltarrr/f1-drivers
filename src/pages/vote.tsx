@@ -31,7 +31,7 @@ const Vote: NextPage = () => {
       <Head>
         <title>Vote</title>
         <meta name="description" content="Vote for your favorite pilot" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <main>
