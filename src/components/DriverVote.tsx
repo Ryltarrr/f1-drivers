@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Driver, Team } from "@prisma/client";
+import { getContrastingColor } from "src/utils/getConstrastingColor";
 
 type Props = {
   driver: Driver & { team: Team };
@@ -9,11 +10,17 @@ type Props = {
 const DriverVote: React.FC<Props> = ({ driver, handleVote }) => {
   return (
     <div
-      className={`flex justify-center flex-col items-center min-w-[200px] rounded-md px-2 py-5`}
-      style={{ backgroundColor: driver.team.color }}
+      className={
+        "flex justify-center flex-col mx-5 md:mx-0 items-center min-w-[250px] rounded-md px-3 py-6 cursor-pointer"
+      }
+      style={{
+        backgroundColor: driver.team.color,
+        color: getContrastingColor(driver.team.color),
+      }}
       key={driver.id}
+      onClick={() => handleVote(driver.id)}
     >
-      <h2 className="overflow-clip">{driver.name}</h2>
+      <h2 className="text-xl">{driver.name}</h2>
       <div className="h-32 w-32 relative">
         <Image
           layout="fill"

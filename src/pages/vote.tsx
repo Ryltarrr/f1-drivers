@@ -35,13 +35,12 @@ const Vote: NextPage = () => {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <main>
-        <h1>Vote</h1>
+      <main className="flex flex-col h-screen justify-center">
         <div>
           {drivers.isLoading ? (
             <p>loading...</p>
           ) : (
-            <div className="flex justify-center space-x-10">
+            <div className="flex flex-1 flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-5">
               {drivers.data?.map(
                 (driver) =>
                   driver && (
