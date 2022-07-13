@@ -25,7 +25,9 @@ const DriverVote: React.FC<Props> = ({ driver, handleVote }) => {
         <Image
           layout="fill"
           objectFit="cover"
+          alt={`${driver.name} profile image`}
           src={`/images/${driver.shortName}.png`}
+          priority
         />
       </div>
       <button className="mt-4" onClick={() => handleVote(driver.id)}>

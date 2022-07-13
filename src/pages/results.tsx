@@ -29,6 +29,7 @@ const Results: NextPage = () => {
                 <Image
                   height="100px"
                   width="100px"
+                  alt={`${result.driver.name} profile image`}
                   src={`/images/${result.driver.shortName}.png`}
                 />
               </div>

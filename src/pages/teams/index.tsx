@@ -13,7 +13,7 @@ const Teams: NextPage = () => {
       <main>
         <h1>Teams</h1>
         {teams.data?.map((t) => (
-          <Link href={`/teams/${t.name}`}>
+          <Link key={t.id} href={`/teams/${t.name}`}>
             <a className="block">{t.name}</a>
           </Link>
         ))}
