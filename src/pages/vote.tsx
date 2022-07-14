@@ -4,14 +4,18 @@ import { trpc } from "src/utils/trpc";
 import DriverVote from "src/components/DriverVote";
 
 const Vote: NextPage = () => {
-  const drivers = trpc.useQuery(["drivers.twoRandom"], {
+  const {
+    data: drivers,
+    refetch,
+    isLoading,
+  } = trpc.useQuery(["drivers.twoRandom"], {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
   const vote = trpc.useMutation(["drivers.vote"]);
 
   const handleVote = (driverId: string) => {
-    const otherId = drivers.data?.find((el) => el?.id !== driverId)?.id;
+    const otherId = drivers?.find((el) => el?.id !== driverId)?.id;
     if (!otherId) {
       return;
     }
@@ -24,7 +28,7 @@ const Vote: NextPage = () => {
       },
     };
     vote.mutate(driversVote);
-    drivers.refetch();
+    refetch();
   };
 
   return (
@@ -37,14 +41,18 @@ const Vote: NextPage = () => {
 
       <main className="flex flex-col h-screen justify-center">
         <div>
-          {drivers.isLoading ? (
+          {isLoading ? (
             <p>loading...</p>
           ) : (
             <div className="flex flex-1 flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-5">
-              {drivers.data?.map(
+              {drivers?.map(
                 (driver) =>
                   driver && (
-                    <DriverVote driver={driver} handleVote={handleVote} />
+                    <DriverVote
+                      key={driver.id}
+                      driver={driver}
+                      handleVote={handleVote}
+                    />
                   )
               )}
             </div>

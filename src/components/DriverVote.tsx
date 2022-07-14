@@ -11,13 +11,12 @@ const DriverVote: React.FC<Props> = ({ driver, handleVote }) => {
   return (
     <div
       className={
-        "flex justify-center flex-col mx-5 md:mx-0 items-center min-w-[250px] rounded-md px-3 py-6 cursor-pointer"
+        "flex justify-center flex-col mx-5 md:mx-0 items-center min-w-[250px] rounded-md px-3 py-6 cursor-pointer animate-fade-in"
       }
       style={{
         backgroundColor: driver.team.color,
         color: getContrastingColor(driver.team.color),
       }}
-      key={driver.id}
       onClick={() => handleVote(driver.id)}
     >
       <h2 className="text-xl">{driver.name}</h2>
@@ -25,7 +24,6 @@ const DriverVote: React.FC<Props> = ({ driver, handleVote }) => {
         <Image
           layout="fill"
           objectFit="cover"
-          alt={`${driver.name} profile image`}
           src={`/images/${driver.shortName}.png`}
           priority
         />
