@@ -10,27 +10,27 @@ type Props = {
 const DriverVote: React.FC<Props> = ({ driver, handleVote }) => {
   return (
     <div
-      className={
-        "flex justify-center flex-col mx-5 md:mx-0 items-center min-w-[250px] rounded-md px-3 py-6 cursor-pointer animate-fade-in"
-      }
+      className="mx-5 md:mx-0 min-w-[250px] rounded-md px-3 py-6 cursor-pointer"
       style={{
         backgroundColor: driver.team.color,
         color: getContrastingColor(driver.team.color),
       }}
       onClick={() => handleVote(driver.id)}
     >
-      <h2 className="text-xl">{driver.name}</h2>
-      <div className="h-32 w-32 relative">
-        <Image
-          layout="fill"
-          objectFit="cover"
-          src={`/images/${driver.shortName}.png`}
-          priority
-        />
+      <div className="flex justify-center items-center flex-col animate-fade-in">
+        <h2 className="text-xl">{driver.name}</h2>
+        <div className="h-32 w-32 relative">
+          <Image
+            layout="fill"
+            objectFit="cover"
+            src={`/images/${driver.shortName}.png`}
+            priority
+          />
+        </div>
+        <button className="mt-4" onClick={() => handleVote(driver.id)}>
+          Vote
+        </button>
       </div>
-      <button className="mt-4" onClick={() => handleVote(driver.id)}>
-        Vote
-      </button>
     </div>
   );
 };
