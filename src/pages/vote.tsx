@@ -41,7 +41,7 @@ const Vote: NextPage = () => {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <main className="flex flex-col h-screen justify-center">
+      <main className="flex flex-col h-[85vh] justify-center">
         <div>
           <div className="flex flex-1 flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-5">
             {fetchingNext ? (

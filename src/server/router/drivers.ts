@@ -1,4 +1,5 @@
 import { PrismaClient, Vote } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createRouter } from "./context";
 
