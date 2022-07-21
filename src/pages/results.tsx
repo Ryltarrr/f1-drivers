@@ -14,16 +14,18 @@ const Results: NextPage = () => {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <main>
-        <h1>Results</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
         {results.data?.map(
-          (result) =>
+          (result, index) =>
             results && (
               <div
+                className="flex flex-col p-3 justify-center items-center rounded-md"
                 style={{ backgroundColor: result.driver.team.color }}
                 key={result.id}
               >
-                <h2>{result.driver.name}</h2>
+                <h2>
+                  P{index + 1} - {result.driver.name}
+                </h2>
                 <p>{`${(result.percentage * 100).toFixed(2)}%`}</p>
                 <p>{result.presented}</p>
                 <Image
@@ -35,7 +37,7 @@ const Results: NextPage = () => {
               </div>
             )
         )}
-      </main>
+      </div>
     </>
   );
 };

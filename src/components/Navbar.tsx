@@ -9,7 +9,7 @@ const links = [
 export default function Navbar() {
   const router = useRouter();
   return (
-    <nav className="fixed w-screen">
+    <nav className="fixed p-5 w-full bg-white z-10">
       <div className="flex space-x-4 justify-center">
         {links.map((link) => (
           <Link href={link.href} key={link.href}>

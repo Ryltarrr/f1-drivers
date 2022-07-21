@@ -31,6 +31,8 @@ const Vote: NextPage = () => {
     refetch();
   };
 
+  const fetchingNext = vote.isLoading || isLoading;
+
   return (
     <>
       <Head>
@@ -41,11 +43,11 @@ const Vote: NextPage = () => {
 
       <main className="flex flex-col h-screen justify-center">
         <div>
-          {isLoading ? (
-            <p>loading...</p>
-          ) : (
-            <div className="flex flex-1 flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-5">
-              {drivers?.map(
+          <div className="flex flex-1 flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-5">
+            {fetchingNext ? (
+              <p className="text-center">loading...</p>
+            ) : (
+              drivers?.map(
                 (driver) =>
                   driver && (
                     <DriverVote
@@ -54,9 +56,9 @@ const Vote: NextPage = () => {
                       handleVote={handleVote}
                     />
                   )
-              )}
-            </div>
-          )}
+              )
+            )}
+          </div>
         </div>
       </main>
     </>
