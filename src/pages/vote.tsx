@@ -45,7 +45,7 @@ const Vote: NextPage = () => {
         <div>
           <div className="flex flex-1 flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-5">
             {fetchingNext ? (
-              <p className="text-center">loading...</p>
+              <p className="text-center dark:text-white">loading...</p>
             ) : (
               drivers?.map(
                 (driver) =>

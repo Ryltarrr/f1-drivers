@@ -5,8 +5,12 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import "../styles/globals.css";
 import Layout from "src/components/Layout";
+import { useEffect } from "react";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  useEffect(() => {
+    document.body.classList.add("dark:bg-gray-800");
+  }, []);
   return (
     <Layout>
       <Component {...pageProps} />
