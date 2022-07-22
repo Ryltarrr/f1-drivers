@@ -11,6 +11,7 @@ const Vote: NextPage = () => {
   } = trpc.useQuery(["drivers.twoRandom"], {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
+    refetchOnMount: false,
   });
   const vote = trpc.useMutation(["drivers.vote"]);
 
